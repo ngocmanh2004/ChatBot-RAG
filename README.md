@@ -216,4 +216,5 @@ Luong chay thuc te:
 
 Tom tat 1 dong de demo voi thay:
 - `TechStore_FE -> M-Bot(chat.service) -> Pinecone + TechStore_BE(SQL specs) -> M-Bot -> TechStore_FE`.#   C h a t B o t - R A G  
+ #   C h a t B o t - R A G  
  
