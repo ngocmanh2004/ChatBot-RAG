@@ -1,0 +1,80 @@
+🧪 CÂU HỎI TEST CHO RAG CHATBOT TECHSTORE
+📱 TEST SẢN PHẨM (Database RAG)
+Tìm kiếm sản phẩm:
+1. "Tìm điện thoại chơi game dưới 15 triệu"
+2. "Điện thoại camera đẹp chụp ảnh sắc nét"
+3. "Laptop cho sinh viên giá rẻ"
+4. "iPhone mới nhất giá bao nhiêu?"
+5. "Samsung Galaxy S24 Ultra còn hàng không?"
+So sánh sản phẩm:
+6. "So sánh iPhone 15 Pro Max và Samsung S24 Ultra"
+7. "Xiaomi 14 Ultra và OPPO Find X7 Ultra khác gì nhau?"
+📦 TEST CHÍNH SÁCH VẬN CHUYỂN (Document RAG)
+8. "Phí vận chuyển ngoại thành là bao nhiêu?"
+9. "Thời gian giao hàng tỉnh thành khác mất bao lâu?"
+10. "Miễn phí vận chuyển từ bao nhiêu tiền?"
+11. "Có giao hàng nhanh 2-4 giờ không?"
+12. "Giao hàng cuối tuần có phụ phí không?"
+🛡️ TEST CHÍNH SÁCH BẢO HÀNH (Document RAG)
+13. "Điện thoại được bảo hành bao lâu?"
+14. "Laptop bảo hành mấy tháng?"
+15. "Trường hợp nào không được bảo hành?"
+16. "Địa chỉ trung tâm bảo hành ở đâu?"
+17. "Thời gian bảo hành mất bao lâu?"
+🔄 TEST CHÍNH SÁCH ĐỔI TRẢ (Document RAG)
+18. "Tôi có thể đổi trả hàng không?"
+19. "Điều kiện đổi trả là gì?"
+20. "Đổi trả trong bao nhiêu ngày?"
+21. "Trường hợp nào không được đổi trả?"
+22. "Hoàn tiền mất bao lâu?"
+💳 TEST THANH TOÁN (Document RAG)
+23. "Có những phương thức thanh toán nào?"
+24. "Thanh toán COD có mất phí không?"
+25. "Chuyển khoản vào tài khoản nào?"
+26. "Thanh toán online có giảm giá không?"
+27. "Có hỗ trợ ví điện tử nào?"
+🎁 TEST KHUYẾN MÃI (Document RAG)
+28. "Có chương trình khuyến mãi gì không?"
+29. "iPhone 15 Pro Max giảm giá bao nhiêu?"
+30. "Flash sale mấy giờ?"
+31. "Có voucher giảm giá không?"
+32. "Thu cũ đổi mới được không?"
+33. "Mua điện thoại có tặng gì không?"
+💰 TEST TRẢ GÓP (Document RAG)
+34. "Làm sao để trả góp 0%?"
+35. "Trả góp cần giấy tờ gì?"
+36. "iPhone 15 Pro Max trả góp 12 tháng mỗi tháng bao nhiêu?"
+37. "Trả góp có cần chứng minh thu nhập không?"
+38. "Duyệt trả góp mất bao lâu?"
+39. "Có thể trả trước hạn không?"
+🏪 TEST THÔNG TIN CỬA HÀNG (Document RAG)
+40. "Địa chỉ cửa hàng TechStore ở đâu?"
+41. "Giờ mở cửa là mấy giờ?"
+42. "Số điện thoại hotline là gì?"
+43. "TechStore có mấy chi nhánh?"
+44. "Chi nhánh Quận 7 ở đâu?"
+🛒 TEST HƯỚNG DẪN MUA HÀNG (Document RAG)
+45. "Làm sao để mua hàng online?"
+46. "Có thể đặt hàng qua điện thoại không?"
+47. "Mua hàng trực tiếp tại cửa hàng được không?"
+48. "Có app TechStore không?"
+🤖 TEST TỔNG HỢP (Multi-turn conversation)
+49. User: "Tìm điện thoại chơi game"
+    Bot: [Gợi ý sản phẩm]
+    User: "Cái nào rẻ nhất?"
+    Bot: [Sản phẩm rẻ nhất]
+    User: "Trả góp được không?"
+    Bot: [Hướng dẫn trả góp]
+
+50. User: "iPhone 15 Pro Max giá bao nhiêu?"
+    Bot: [Giá sản phẩm]
+    User: "Có khuyến mãi không?"
+    Bot: [Khuyến mãi]
+    User: "Bảo hành bao lâu?"
+    Bot: [Chính sách bảo hành]
+🎯 TEST EDGE CASES
+51. "Xin chào" (casual conversation)
+52. "Cảm ơn" (casual conversation)
+53. "Sản phẩm không tồn tại XYZ123" (không có trong DB)
+54. "Giá iPhone 20" (sản phẩm chưa ra mắt)
+55. "Có bán xe máy không?" (ngoài danh mục)

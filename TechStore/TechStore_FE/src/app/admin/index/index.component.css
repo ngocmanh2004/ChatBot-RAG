@@ -1,0 +1,101 @@
+h2,
+h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.dashboard-container {
+  padding: 0.5rem 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card a.btn {
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.card a.btn:hover {
+  background-color: #ffffff;
+  color: #000 !important;
+  transform: scale(1.05);
+}
+
+
+.chart-container {
+  max-width: 95%;
+  margin: 30px auto 40px auto;
+  padding: 25px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.bar-chart {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  height: 250px;
+  padding: 0 10px 10px 10px;
+  border-left: 3px solid #333;
+  border-bottom: 3px solid #333;
+  background: #fafafa;
+  width: 100%;
+}
+
+.bar {
+  position: relative;
+  width: 4%;
+  margin-right: 10px;
+  background-color: #3498db;
+  border-radius: 6px 6px 0 0;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.bar:hover {
+  background-color: #2980b9;
+}
+
+.bar .label {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #333;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+.bar .revenue-label {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #111;
+  white-space: nowrap;
+  user-select: none;
+}

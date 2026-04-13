@@ -1,0 +1,97 @@
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1"
+  aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Sửa User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form *ngIf="selected_user" (ngSubmit)="suaUser()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Tên</label>
+            <input type="text" class="form-control" id="username"
+              [(ngModel)]="username" name="username" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email"
+              [(ngModel)]="email" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">SĐT</label>
+            <input type="text" class="form-control" id="phone"
+              [(ngModel)]="phone" name="phone" required>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address"
+              [(ngModel)]="address" name="address" required>
+          </div>
+          <div class="mb-3">
+            <label for="create_at" class="form-label">Ngày đăng ký:</label>
+            <input type="date" class="form-control" id="create_at"
+              [value]="create_at | date:'yyyy-MM-dd'" name="create_at"
+              readonly />
+          </div>
+          <div style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn btn-danger"
+              data-bs-dismiss="modal">Cập Nhật</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-3">
+  <h3>Danh Sách Khách Hàng</h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Tên khách hàng</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Ngày đăng ký</th>
+        <th style="width: 300px;">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of list_user">
+        <td>
+          {{user.username}}
+        </td>
+        <td>
+          {{user.email}}
+        </td>
+        <td>
+          {{user.phone}}
+        </td>
+        <td>
+          {{user.address}}
+        </td>
+        <td>{{ user.create_at | date:'MM/dd/yyyy'}}</td>
+        <td class="sua-xoa">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+            data-bs-target="#addModal" (click)="editUser(user)">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button style="margin-left: 20px;" type="button"
+            class="btn btn-warning" (click)="xoaUser(user)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

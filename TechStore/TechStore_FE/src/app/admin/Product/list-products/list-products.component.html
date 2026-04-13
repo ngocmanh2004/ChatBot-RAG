@@ -1,0 +1,142 @@
+<h2>Quản lý sản phẩm</h2>
+<!-- Modal edit products -->
+<div class="modal fade" id="addModal" tabindex="-1"
+  aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Sửa Sản Phẩm Mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+
+      </div>
+
+      <div class="modal-body">
+        <form *ngIf="selected_product" (ngSubmit)="suaProduct()">
+          <div *ngIf="image_url && image_url.trim().length > 0">
+            <img [src]="photosUrl + '/' + image_url" alt="Image Preview"
+              width="100" />
+          </div>
+          <label for="image">Upload Images</label>
+          <input class="form-control" type="file" id="image"
+            (change)="uploadPhoto($event)">
+
+          <div class>
+            <div class="row form-group">
+              <label class>Tên: </label>
+              <div class>
+                <input class="form-control" [(ngModel)]="product_name"
+                  name="product_name">
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class>Danh mục: </label>
+              <div class>
+                <select class="form-control" [(ngModel)]="category_id"
+                  name="category_id">
+                  <option *ngFor="let danhmuc of list_category"
+                    [value]="danhmuc.category_id">
+                    {{danhmuc.category_name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class>Thương hiệu: </label>
+              <div class>
+                <select class="form-control" [(ngModel)]="brand_id"
+                  name="brand_id">
+                  <option *ngFor="let brand of list_brand"
+                    [value]="brand.brand_id">
+                    {{brand.brand_name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class>Giá: </label>
+              <div class>
+                <input class="form-control" type="number" [(ngModel)]="price"
+                  name="price">
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class>Số lượng: </label>
+              <div class>
+                <input class="form-control" type="number" [(ngModel)]="quantity"
+                  name="quantity">
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class>Mô tả: </label>
+              <div class>
+                <textarea class="form-control" type="string"
+                  [(ngModel)]="description" name="description"></textarea>
+              </div>
+            </div>
+
+          </div>
+          <div style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn btn-danger"
+              data-bs-dismiss="modal">Cập Nhật</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="create-button">
+  <button type="button" class="btn btn-primary"
+    [routerLink]="['/admin/products/create']"
+    style="margin-left: 30px; margin-top: 20px;" data-bs-toggle="modal"
+    data-bs-target="#exampleModal">
+    + Thêm Sản Phẩm
+  </button>
+</div>
+
+<div class="table-responsive p-4">
+  <table class="table table-bordered table-hover align-middle text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Hình ảnh</th>
+        <th>Thương hiệu</th>
+        <th>Danh mục</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let product of searchList.length > 0 ? searchList : paginatedProducts; let i = index">
+        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+        <td>{{ product.product_name }}</td>
+        <td><img [src]="product.PathAnh" alt="{{ product.product_name }}"
+            width="80" height="80" style="object-fit: contain;" /></td>
+        <td>{{ getBrandNameById(product.brand_id) }}</td>
+        <td>{{ getCategoryNameById(product.category_id) }}</td>
+        <td>{{ product.price | number:'1.0-0' }} đ</td>
+        <td>{{ product.quantity }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+            data-bs-target="#addModal"
+            (click)="editProduct(product)">Sửa</button>
+          <button class="btn btn-danger btn-sm"
+            (click)="xoaProduct(product)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-controls">
+  <button class="btn btn-secondary" (click)="previousPage()"
+    [disabled]="currentPage === 1">Trước</button>
+  <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+  <button class="btn btn-secondary" (click)="nextPage()"
+    [disabled]="currentPage === totalPages">Tiếp</button>
+</div>

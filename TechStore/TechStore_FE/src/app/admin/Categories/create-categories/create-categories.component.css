@@ -1,0 +1,63 @@
+.create-form {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 30px 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.create-form .modal-header {
+  background-color: #007bff;
+  color: white;
+  padding: 16px;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -30px -40px 30px -40px;
+}
+
+.create-form .btn-close {
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.create-form .btn-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.create-form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.create-form input {
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.create-form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.create-form .btn-primary {
+  padding: 10px 30px;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-form .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}

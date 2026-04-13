@@ -1,0 +1,14 @@
+<form class="create-form" (ngSubmit)="themDanhmuc()" style="margin-top: 100px;">
+  <div class="modal-header">
+    <h5 class="modal-title" id="addModalLabel">Thêm danh mục</h5>
+    <button style="margin-bottom: 50px;" type="button" class="btn-close"
+      (click)="closeForm()"></button>
+  </div>
+  <div class="mb-3 row">
+    <label for="name" class="col-sm-3">Tên</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="name"
+      name="name" required>
+  </div>
+  <button style="margin-left: 150px; margin-top: 30px;" type="submit"
+    class="btn btn-primary">Thêm</button>
+</form>

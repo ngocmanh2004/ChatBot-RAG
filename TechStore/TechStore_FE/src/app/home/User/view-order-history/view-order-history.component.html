@@ -1,0 +1,72 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-link" [routerLink]="['/home/list']">Trang Chủ</a>
+  <span> &gt; Đơn hàng của tôi</span>
+</nav>
+
+<div class="container-main">
+  <div class="user-info">
+    <img src="assets/img/user.jpg" class="profile-image" alt="User" />
+    <div>
+      <p>{{ user_name }}</p>
+      <p>{{ phone }}</p>
+    </div>
+    <div class="actions">
+      <a [routerLink]="['/home/user/updateUser', user_id]">Cập nhật thông tin</a> |
+      <a [routerLink]="['/home/user/updatePW', user_id]">Đổi mật khẩu</a> |
+      <a (click)="logout()"><i class="fas fa-sign-out-alt" ></i><p>Đăng xuất</p></a>
+    </div>
+  </div>
+
+  <h3>Đơn hàng của tôi</h3>
+  <div *ngIf="ordersWithDetails.length; else noOrders">
+    <div *ngFor="let group of ordersWithDetails" class="order-card">
+      <div class="order-header">
+        <span>Mã đơn: {{ group.order.order_id }}</span>
+        <span>Ngày: {{ group.order.create_at | date:'dd/MM/yyyy' }}</span>
+        <span>Trạng thái: <strong>{{ group.order.order_status }}</strong></span>
+        <span>Tổng: {{ group.order.total_amount | number }} đ</span>
+      </div>
+
+      <table class="table table-bordered order-table">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="group.details.length > 0">
+          <td>
+            <img [src]="PhotosUrl + '/' + group.details[0].product.image_url"
+                width="80" alt="{{ group.details[0].product.product_name }}" />
+          </td>
+          <td>
+            {{ group.details[0].product.product_name }}
+            <span *ngIf="group.details.length > 1" style="color: gray;">
+              ... (và {{ group.details.length - 1 }} sản phẩm khác)
+            </span>
+          </td>
+          <td>{{ group.details[0].orderDetail.number_of_products }}</td>
+          <td>{{ group.details[0].product.price | number }} đ</td>
+        </tr>
+      </tbody>
+    </table>
+      <div class="order-actions">
+        <button class="btn btn-primary"
+        (click)="viewOrderDetails(group.order.order_id, user_id)"> 
+        Xem chi tiết
+        </button>
+        <button class="btn btn-danger"
+        (click)="cancelOrder(group.order.order_id)">
+          Hủy đơn
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <p>Chưa có đơn hàng nào.</p>
+  </ng-template>
+</div>

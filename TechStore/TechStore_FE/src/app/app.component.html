@@ -1,0 +1,46 @@
+<router-outlet></router-outlet>
+
+<div title="Giỏ hàng" *ngIf="!isCartDetailPage">
+  <!-- Floating cart button -->
+  <div class="floating-cart" (click)="toggleCartPanel()">
+    <i class="fa fa-shopping-cart"></i>
+    <span class="cart-count" *ngIf="cartItems.length > 0">{{ cartItems.length }}</span>
+  </div>
+
+  <!-- Slide-in cart panel -->
+  <div class="cart-panel" [class.open]="showCartPanel">
+    <h3><i class="fa fa-shopping-cart" style="color: #2563eb; font-size: 15px;"></i> Giỏ hàng của bạn</h3>
+
+    <ul *ngIf="cartItems.length > 0">
+      <li *ngFor="let item of cartItems">
+        <img [src]="item.PathAnh" alt="{{ item.product_name }}" class="product-image"
+          width="56" height="56"
+          (error)="item.PathAnh = 'assets/images/default-image.jpg'" />
+        <div>
+          <strong>{{ item.product_name }}</strong>
+          <span>{{ item.price | number:'1.0-0' }}₫ × {{ item.quantity }}</span>
+          <div>
+            <button (click)="decreaseQuantity(item)" aria-label="Giảm">−</button>
+            <button (click)="increaseQuantity(item)" aria-label="Tăng">+</button>
+            <button (click)="removeItem(item)" class="btn-remove" aria-label="Xóa">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="cart-panel-empty" *ngIf="cartItems.length === 0">
+      <i class="fa fa-shopping-bag" style="font-size: 2.2rem; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
+      Giỏ hàng của bạn đang trống.
+    </div>
+
+    <div *ngIf="cartItems.length > 0" class="cart-panel-footer">
+      <button (click)="goToCartDetail()" class="btn-view-cart">
+        <i class="fa fa-eye"></i>&nbsp; Xem chi tiết giỏ hàng
+      </button>
+    </div>
+  </div>
+
+  <app-chatbot></app-chatbot>
+</div>

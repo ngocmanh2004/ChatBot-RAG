@@ -1,0 +1,48 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-link" [routerLink]="['/home/list']">Trang Chủ</a>
+  <span class="breadcrumb-separator">›</span>
+  <span class="breadcrumb-current">Đăng ký</span>
+</nav>
+
+<div class="register-container">
+  <h2>Đăng ký</h2>
+  <form (ngSubmit)="dangKy()" #registerForm="ngForm">
+    <div class="form-group">
+      <label for="username">Tên người dùng:</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Số điện thoại:</label>
+      <input type="text" id="phone" [(ngModel)]="phone" name="phone" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <div class="form-group">
+      <label for="rePassword">Nhập lại mật khẩu:</label>
+      <input type="password" id="rePassword" [(ngModel)]="rePassword" name="rePassword" required />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Địa chỉ:</label>
+      <input type="text" id="address" [(ngModel)]="address" name="address" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Đăng ký</button>
+    </div>
+        <div class="login-redirect">
+      Đã có tài khoản?
+      <a [routerLink]="['/home/user/login']">Đăng nhập tại đây</a>
+    </div>
+  </form>
+</div>

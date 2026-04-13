@@ -1,0 +1,255 @@
+﻿<div class="ui-container category-page">
+  <section class="category-hero">
+    <div class="hero-glow hero-glow-left"></div>
+    <div class="hero-glow hero-glow-right"></div>
+
+    <nav class="breadcrumb-modern category-breadcrumb">
+      <a [routerLink]="['/home/list']">Trang chủ</a>
+      <i class="fa fa-chevron-right"></i>
+      <label>Danh mục</label>
+      <i class="fa fa-chevron-right"></i>
+      <strong>{{ categoryName || 'Sản phẩm' }}</strong>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-copy">
+        <span class="hero-chip">
+          <i class="fa fa-bolt"></i>
+          Bộ sưu tập nổi bật
+        </span>
+        <h1>{{ categoryName || 'Công nghệ cho phong cách sống hiện đại' }}</h1>
+        <p>Chọn nhanh theo mức giá và thương hiệu để tìm đúng sản phẩm bạn cần.</p>
+        <div class="hero-stats">
+          <span><i class="fa fa-cube"></i> {{ DsSP.length }} sản phẩm</span>
+          <span><i class="fa fa-shield"></i> Bảo hành chính hãng</span>
+          <span><i class="fa fa-truck"></i> Giao nhanh toàn quốc</span>
+        </div>
+      </div>
+
+      <div class="hero-filter-card">
+        <div class="filter-group">
+          <span class="filter-label"><i class="fa fa-filter"></i> Lọc theo giá</span>
+          <select class="filter-select" (change)="onFilterChange($event)">
+            <option value="">Tất cả mức giá</option>
+            <option value="low">Dưới 1 triệu</option>
+            <option value="medium">Từ 1 triệu đến 5 triệu</option>
+            <option value="high">Từ 5 triệu đến 10 triệu</option>
+            <option value="premium">Lớn hơn 10 triệu</option>
+          </select>
+        </div>
+
+        <div class="brand-sub-nav" *ngIf="DsTH.length > 0">
+          <span class="filter-label">Thương hiệu</span>
+          <div class="brand-pills">
+            <a *ngFor="let loai of DsTH" class="brand-pill" [routerLink]="['brand/', loai.brand_id]">
+              {{ loai.brand_name }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brand-showcase" *ngIf="DsTH.length > 0">
+    <h2>Khám phá bộ sưu tập đa dạng</h2>
+    <div class="showcase-grid">
+      <a class="showcase-card" *ngFor="let loai of DsTH | slice:0:6" [routerLink]="['brand/', loai.brand_id]">
+        <span>{{ loai.brand_name }}</span>
+        <i class="fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="product-area">
+    <div class="section-head">
+      <h2>Công nghệ hàng đầu</h2>
+      <span>{{ DsSP.length }} sản phẩm</span>
+    </div>
+
+    <div class="grid-section">
+      <div *ngIf="DsSP.length === 0" class="empty-state">
+        <div class="empty-icon"><i class="fa fa-shopping-bag"></i></div>
+        <h3>Không có sản phẩm</h3>
+        <p>{{ noProductsMessage || 'Hiện tại chưa có sản phẩm phù hợp trong danh mục này.' }}</p>
+        <a [routerLink]="['/home/list']" class="btn btn-primary">Quay lại cửa hàng</a>
+      </div>
+
+      <div class="product-grid-modern" *ngIf="DsSP.length > 0">
+        <article class="product-card-modern" *ngFor="let product of paginatedProducts">
+          <div class="card-top">
+            <span class="card-badge" [ngClass]="product.price > 15000000 ? 'badge-sale' : 'badge-new'">
+              {{ product.price > 15000000 ? 'Ưu đãi' : 'Mới' }}
+            </span>
+          </div>
+
+          <a class="card-img-wrap" [routerLink]="['/home/product/detail/', product.product_id]">
+            <img [src]="product.PathAnh" [alt]="product.product_name"
+              (error)="product.PathAnh = 'assets/images/default-product.png'" />
+          </a>
+
+          <div class="card-body">
+            <a [routerLink]="['/home/product/detail/', product.product_id]" class="product-title">
+              {{ product.product_name }}
+            </a>
+            <div class="price-wrap">
+              <span class="current-price">{{ product.price | number:'1.0-0' }}<span class="currency">đ</span></span>
+              <span class="old-price" *ngIf="product.price > 15000000">{{ product.price * 1.08 | number:'1.0-0' }}đ</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-card btn-buy-now" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              (click)="themDon(product)">
+              <i class="fa fa-bolt"></i> Mua ngay
+            </button>
+            <button class="btn-card btn-cart-ghost" (click)="addToCart(product)">
+              <i class="fa fa-shopping-cart"></i> Giỏ hàng
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-strip">
+    <div class="trust-item">
+      <i class="fa fa-truck"></i>
+      <span>Miễn phí vận chuyển</span>
+    </div>
+    <div class="trust-item">
+      <i class="fa fa-refresh"></i>
+      <span>Đổi trả 7 ngày</span>
+    </div>
+    <div class="trust-item">
+      <i class="fa fa-shield"></i>
+      <span>Bảo hành chính hãng</span>
+    </div>
+    <div class="trust-item">
+      <i class="fa fa-headphones"></i>
+      <span>Hỗ trợ 24/7</span>
+    </div>
+  </section>
+
+  <div class="pagination-modern" *ngIf="totalPages > 1">
+    <button class="page-link-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <span class="page-info">Trang {{ currentPage }} / {{ totalPages }}</span>
+    <button class="page-link-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+  <!-- Payment Modal (Standardized) -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    *ngIf="userService.getCurrentUser() && dangThemSua">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <i class="fa fa-credit-card"></i> Thanh toÃ¡n Ä‘Æ¡n hÃ ng
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="dong()"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="showSuccessMessage" class="alert alert-success text-center">
+            <i class="fa fa-check-circle" style="font-size: 32px; margin-bottom: 8px;"></i>
+            <p style="margin: 0; font-weight: 600;">Äáº·t hÃ ng thÃ nh cÃ´ng!</p>
+            <small>Vui lÃ²ng chá»...</small>
+          </div>
+
+          <div *ngIf="errorMessage && dangThemSua" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> {{ errorMessage }}
+          </div>
+
+          <div *ngIf="bankInfo && transferInstructions" class="alert alert-info text-center">
+            <h5><i class="fa fa-university"></i> HÆ°á»›ng dáº«n chuyá»ƒn khoáº£n</h5>
+            <p>QuÃ©t mÃ£ QR vÃ  nháº­p thÃ´ng tin:</p>
+            <img [src]="qrCodeUrl" 
+                 style="width: 200px; height: 200px; display: block; margin: 16px auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+                 (error)="qrCodeUrl = 'assets/images/default-image.jpg'" />
+            <pre style="background: white; padding: 16px; border-radius: 8px; text-align: left;">{{ bankInfo }}</pre>
+            <p style="color: #856404;">{{ transferInstructions }}</p>
+            <button class="btn btn-primary mt-3" (click)="confirmTransfer()">
+              <i class="fa fa-check"></i> ÄÃ£ chuyá»ƒn khoáº£n
+            </button>
+          </div>
+
+          <div *ngIf="selectedItem && !showSuccessMessage && !bankInfo; else noSelection">
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>Sáº£n pháº©m</th>
+                    <th>GiÃ¡</th>
+                    <th>Sá»‘ lÆ°á»£ng</th>
+                    <th class="text-end">Tá»•ng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="d-flex align-items-center gap-2">
+                      <img [src]="selectedItem.PathAnh" width="60" style="border-radius: 8px;"
+                        (error)="selectedItem.PathAnh = 'assets/images/default-image.jpg'" />
+                      <span style="font-weight: 600;">{{ selectedItem.product.product_name }}</span>
+                    </td>
+                    <td>{{ selectedItem.price | number:'1.0-0' }}Ä‘</td>
+                    <td>
+                      <input type="number" class="form-control" style="width: 80px;" 
+                             [(ngModel)]="selectedItem.quantity" min="1"
+                             (ngModelChange)="selectedItem.total_amount = selectedItem.price * selectedItem.quantity" />
+                    </td>
+                    <td class="text-end" style="font-weight: 700; color: #dc2626;">{{ selectedItem.total_amount | number:'1.0-0' }}Ä‘</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <ng-template #noSelection>
+            <p class="text-center text-muted" *ngIf="!showSuccessMessage && !bankInfo">
+              Vui lÃ²ng chá»n sáº£n pháº©m Ä‘á»ƒ thanh toÃ¡n.
+            </p>
+          </ng-template>
+
+          <form #paymentForm="ngForm" *ngIf="dangThemSua && !bankInfo && !showSuccessMessage"
+            (ngSubmit)="muaNgay(paymentForm)" class="mt-4">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="fullname" class="form-label">Há» tÃªn</label>
+                <input type="text" id="fullname" name="fullname" class="form-control" 
+                       placeholder="Nguyá»…n VÄƒn A"
+                       ngModel required pattern="[A-Za-zÃ€-á»¹\s]+" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="phone" class="form-label">Sá»‘ Ä‘iá»‡n thoáº¡i</label>
+                <input type="text" id="phone" name="phone" class="form-control" 
+                       placeholder="0901234567"
+                       ngModel required pattern="[0-9]{10}" />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Äá»‹a chá»‰ giao hÃ ng</label>
+              <input type="text" id="address" name="address" class="form-control" 
+                     placeholder="Sá»‘ nhÃ , Ä‘Æ°á»ng..."
+                     ngModel required minlength="5" />
+            </div>
+            <div class="mb-4">
+              <label for="payment" class="form-label">PhÆ°Æ¡ng thá»©c thanh toÃ¡n</label>
+              <select id="payment" name="payment" class="form-select" ngModel required>
+                <option value="COD">ðŸ’µ Thanh toÃ¡n khi nháº­n hÃ ng (COD)</option>
+                <option value="Banking">ðŸ¦ Chuyá»ƒn khoáº£n ngÃ¢n hÃ ng</option>
+              </select>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary flex-grow-1" [disabled]="!paymentForm.valid">
+                <i class="fa fa-check"></i> XÃ¡c nháº­n Ä‘áº·t hÃ ng
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="dong()">
+                Há»§y
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

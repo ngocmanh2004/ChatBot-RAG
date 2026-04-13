@@ -1,0 +1,27 @@
+<form class="create-form" (ngSubmit)="themUser()" style="margin-top: 100px;">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addModalLabel">Thêm danh mục</h5>
+      <button style="margin-bottom: 50px;" type="button" class="btn-close"  (click)="closeForm()"></button>
+    </div>  
+    <label for="username" class="form-label">Tên</label>
+    <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">SĐT</label>
+    <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">Địa chỉ</label>
+    <input type="text" class="form-control" id="address" [(ngModel)]="address" name="address" required>
+  </div>
+    <div class="mb-3">
+    <label for="create_at">Ngày đăng ký:</label>
+    <input type="date" class="form-control" id="create_at" [(ngModel)]="create_at" name="create_at" required/>
+    </div>
+      <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+    

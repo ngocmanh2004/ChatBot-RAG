@@ -1,0 +1,233 @@
+﻿<header id="main-header">
+  <div class="header-inner ui-container">
+    <a class="logo-brand" [routerLink]="['/home/list']" title="TechStore">
+      <span class="logo-text">TechStore</span>
+    </a>
+
+    <div class="mobile-top-actions">
+      <button type="button" class="icon-action" aria-label="Yêu thích">
+        <i class="fa fa-heart-o"></i>
+        <span class="action-badge">2</span>
+      </button>
+
+      <a [routerLink]="['/home/product/carts']" class="cart-icon-link" aria-label="Giỏ hàng">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-badge">3</span>
+      </a>
+
+      <button class="mobile-menu-btn" [class.active]="isMobileMenuOpen" (click)="toggleMobileMenu()"
+        aria-label="Mở menu">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="header-body" [class.mobile-open]="isMobileMenuOpen">
+      <nav class="header-nav" aria-label="Danh mục sản phẩm">
+        <a class="nav-link" [routerLink]="['/home/list']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
+        <a *ngFor="let loai of DsDM" class="nav-link" [routerLink]="['/home/product/category', loai.category_id]"
+          routerLinkActive="active">
+          {{ loai.category_name }}
+        </a>
+      </nav>
+
+      <div class="header-search">
+        <i class="fa fa-search search-icon"></i>
+        <input type="text" [(ngModel)]="searchText" (keydown.enter)="timkiem()" placeholder="Tìm kiếm sản phẩm..."
+          id="search-input" autocomplete="off" />
+        <button id="search-btn" type="button" (click)="timkiem()" aria-label="Tìm kiếm">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="icon-action" aria-label="Yêu thích">
+          <i class="fa fa-heart-o"></i>
+          <span class="action-badge">2</span>
+        </button>
+
+        <a [routerLink]="['/home/product/carts']" class="cart-icon-link" aria-label="Giỏ hàng">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="cart-badge" *ngIf="isLoggedIn">0</span>
+        </a>
+
+        <ng-container *ngIf="!isLoggedIn">
+          <a [routerLink]="['login']" class="btn-login">Đăng nhập</a>
+          <a [routerLink]="['user/register']" class="btn-register">Đăng ký</a>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <div class="user-dropdown">
+            <button class="user-trigger">
+              <i class="fa fa-user-circle"></i>
+              <span class="user-name-text">{{ userService.getCurrentUser()?.username }}</span>
+              <i class="fa fa-caret-down" style="font-size: 11px"></i>
+            </button>
+            <ul class="dropdown-panel">
+              <li>
+                <a [routerLink]="['/home/user/updateUser', userService.getCurrentUser()?.user_id]">
+                  <i class="fa fa-user"></i> Tài khoản
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/home/user/viewOH', userService.getCurrentUser()?.user_id]">
+                  <i class="fa fa-history"></i> Lịch sử mua hàng
+                </a>
+              </li>
+              <li *ngIf="userService.getCurrentUser()?.role_id == 1">
+                <a [routerLink]="['/admin']">
+                  <i class="fa fa-shield-alt"></i> Trang Admin
+                </a>
+              </li>
+              <li class="dropdown-separator"></li>
+              <li (click)="logout()" class="logout-item">
+                <i class="fa fa-sign-out-alt"></i> Đăng xuất
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</header>
+<button type="button" class="mobile-menu-overlay" *ngIf="isMobileMenuOpen" (click)="toggleMobileMenu()"
+  aria-label="Đóng menu"></button>
+
+<section class="hero-stage" *ngIf="isLandingRoute">
+  <div class="hero-banner" [style.backgroundImage]="'linear-gradient(90deg, rgba(2,6,23,0.82) 0%, rgba(2,6,23,0.35) 52%, rgba(2,6,23,0.12) 100%), url(' + currentHero.image + ')'">
+    <button class="hero-nav hero-prev" (click)="prevSlide()" aria-label="Slide trước">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+
+    <div class="hero-content ui-container">
+      <span class="hero-badge">
+        <i class="fa fa-fire"></i>
+        {{ currentHero.badge }}
+      </span>
+      <h1>{{ currentHero.title }}</h1>
+      <h3>{{ currentHero.subtitle }}</h3>
+      <p>{{ currentHero.description }}</p>
+
+      <div class="hero-price-row">
+        <strong>{{ currentHero.price }}</strong>
+        <span class="old-price">{{ currentHero.oldPrice }}</span>
+      </div>
+      <div class="hero-saving">
+        <i class="fa fa-arrow-down"></i>
+        {{ currentHero.saving }}
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" [routerLink]="currentHero.primaryLink">
+          <i class="fa fa-shopping-cart"></i>
+          Mua ngay
+        </a>
+        <a class="btn btn-secondary hero-ghost-btn" [routerLink]="currentHero.secondaryLink">
+          <i class="fa fa-eye"></i>
+          Xem chi tiết
+        </a>
+      </div>
+
+      <div class="hero-benefits">
+        <span><i class="fa fa-truck"></i> Miễn phí vận chuyển</span>
+        <span><i class="fa fa-shield"></i> Bảo hành 12 tháng</span>
+      </div>
+    </div>
+
+    <button class="hero-nav hero-next" (click)="nextSlide()" aria-label="Slide tiếp theo">
+      <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <div class="hero-dots ui-container">
+    <button *ngFor="let slide of heroSlides; let i = index" type="button" class="hero-dot"
+      [class.active]="i === currentSlide" (click)="goToSlide(i)" [attr.aria-label]="'Chuyển slide ' + (i + 1)"></button>
+  </div>
+
+  <div class="category-cards ui-container">
+    <a class="category-card" *ngFor="let loai of DsDM | slice:0:8" [routerLink]="['/home/product/category', loai.category_id]">
+      <i [class]="getCategoryIcon(loai.category_name)"></i>
+      <div>
+        <h3>{{ loai.category_name }}</h3>
+        <p>Ưu đãi hấp dẫn hôm nay</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="policy-row ui-container" *ngIf="isLandingRoute">
+  <article><i class="fa fa-shipping-fast"></i> Giao trong 1 giờ nội thành</article>
+  <article><i class="fa fa-shield-alt"></i> Bảo hành chính hãng toàn quốc</article>
+  <article><i class="fa fa-credit-card"></i> Trả góp 0% nhanh gọn</article>
+</section>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<footer>
+  <div class="footer-grid ui-container">
+    <div class="footer-section">
+      <div class="footer-logo">TechStore</div>
+      <p>Hệ sinh thái mua sắm thiết bị công nghệ hiện đại, tập trung vào trải nghiệm người dùng và dịch vụ hậu mãi.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Hỗ trợ</h3>
+      <ul>
+        <li><a [routerLink]="['/home/list']">Trang chủ</a></li>
+        <li><a [routerLink]="['/home/product/carts']">Giỏ hàng</a></li>
+        <li><a [routerLink]="['/home/user/register']">Đăng ký tài khoản</a></li>
+        <li><a [routerLink]="['/home/login']">Đăng nhập</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Kết nối</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/yuki494.vn" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@fushi494" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="newsletter">
+        <p class="newsletter-label">Nhận ưu đãi qua email</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Nhập email của bạn..." class="newsletter-input" />
+          <button class="btn btn-primary newsletter-btn" type="button">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Liên hệ</h3>
+      <p>Địa chỉ: <a href="javascript:void(0)" (click)="openMapModal()">138 Cần Vương, Quy Nhơn, Bình Định</a></p>
+      <p>Hotline: 0779421219</p>
+      <p>Email: TechStore123&#64;gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom ui-container">
+    <p>© 2026 TechStore. Tất cả quyền được bảo lưu.</p>
+  </div>
+</footer>
+
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true" *ngIf="showMap">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mapModalLabel">Vị trí cửa hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeMapModal()"></button>
+      </div>
+      <div class="modal-body">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.3545421425247!2d109.21158981944244!3d13.757480365991613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6ce9f2011a65%3A0x7dca828134b0963!2zMTM4IEPhuqduIFbGsMahbmcsIE5ndXnhu4VuIFbEg24gQ-G7qywgUXV5IE5oxqFuLCBCw6xuaCDEkOG7i25oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1749622057052!5m2!1svi!2s"
+          width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="mt-3">
+          <a href="https://www.google.com/maps/place/138+C%E1%BA%A7u+V%C4%A9nh+Tuy" target="_blank" class="btn btn-primary">Mở trên Google Maps</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeMapModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

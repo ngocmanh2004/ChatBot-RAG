@@ -1,0 +1,40 @@
+<div class="dashboard-container">
+  <h2>Dashboard - Tổng quan</h2>
+  <div class="cards">
+    <div class="card bg-primary text-white">
+      <h4>Người dùng</h4>
+      <p>{{ totalUsers | number }}</p>
+      <a routerLink="/admin/users/list" class="btn btn-outline-light mt-2">Xem chi tiết</a>
+    </div>
+    <div class="card bg-success text-white">
+      <h4>Đơn hàng</h4>
+      <p>{{ totalOrders | number }}</p>
+      <a routerLink="/admin/donhang/list" class="btn btn-outline-light mt-2">Xem chi tiết</a>
+    </div>
+    <div class="card bg-warning text-white">
+      <h4>Sản phẩm</h4>
+      <p>{{ totalProducts | number }}</p>
+      <a routerLink="/admin/products" class="btn btn-outline-light mt-2">Xem chi tiết</a>
+    </div>
+    <div class="card bg-danger text-white">
+      <h4>Doanh thu</h4>
+      <p>{{ totalRevenue | currency:'VND':'symbol':'1.0-0' }}</p>
+      <a routerLink="/admin/donhang/list" class="btn btn-outline-light mt-2">Xem chi tiết</a>
+    </div>
+  </div>
+</div>
+
+<div class="chart-container mt-4">
+  <h4>Doanh thu theo tháng</h4>
+  <div class="bar-chart">
+    <div 
+      class="bar" 
+      *ngFor="let revenue of monthlyRevenueData; let i = index" 
+      [style.height.%]="getBarHeight(revenue)">
+      <span class="revenue-label">
+        {{ revenue | currency:'VND':'symbol':'1.0-0' }}
+      </span>
+      <span class="label">{{ monthlyRevenueLabels[i] }}</span>
+    </div>
+  </div>
+</div>

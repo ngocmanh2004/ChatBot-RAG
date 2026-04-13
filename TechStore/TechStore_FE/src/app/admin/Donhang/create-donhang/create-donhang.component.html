@@ -1,0 +1,62 @@
+<!-- Nút mua hàng -->
+<div class="product-actions">
+  <div class="create-button">
+    <button type="button" class="btn-buy-now" data-bs-toggle="modal"
+      data-bs-target="#exampleModal" (click)="themDon()">Mua ngay</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"
+              style="margin-left: 20px;">Thanh toán đơn hàng</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close" style="margin-bottom: 20px;"
+              (click)="dong()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="address">Chọn sản phẩm</label>
+              <select class="form-control" [(ngModel)]="product_id"
+                name="product_id" (change)="layDetailsSP(product_id)">
+                <option *ngFor="let t of DsProduct" [value]="t.product_id">
+                  {{ t.product_name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="address">Địa chỉ giao hàng</label>
+              <input type="text" id="address" name="address"
+                placeholder="Nhập địa chỉ giao hàng" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Số điện thoại</label>
+              <input type="tel" id="phone" name="phone"
+                placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+              <small>Format: 10 digits (e.g., 0123456789)</small>
+            </div>
+            <div class="form-group">
+              <label for="payment">Phương thức thanh toán</label>
+              <select id="payment" name="payment" required>
+                <option value>Chọn một phương thức thanh toán</option>
+                <option value="credit_card">Thanh toán bằng thẻ tín
+                  dụng</option>
+                <option value="bank_transfer">Chuyển khoản</option>
+                <option value="cash_on_delivery">Thanh toán khi nhận
+                  hàng</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+              data-bs-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-primary"
+              (click)="addProductToOrder()">Đặt ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

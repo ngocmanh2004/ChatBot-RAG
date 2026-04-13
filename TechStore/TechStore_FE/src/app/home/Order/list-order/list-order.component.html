@@ -1,0 +1,26 @@
+<div class="orders-container">
+    <h2 class="section-title">Danh sách đơn hàng</h2>
+  
+    <div *ngIf="orders && orders.length > 0; else noOrders">
+      <div class="order-item" *ngFor="let order of orders">
+        <div class="order-header">
+          <h3>Đơn hàng <span>{{ order.order_id }}</span></h3>
+          <p class="order-status">{{ order.order_status }}</p>
+        </div>
+  
+        <div class="order-details">
+          <p><strong>Khách hàng:</strong> {{ username }}</p>
+          <p><strong>Ngày tạo:</strong> {{ order.create_at | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Tổng tiền:</strong> {{ order.total_amount | currency }}</p>
+        </div>
+  
+        <button (click)="viewOrderDetails(order.order_id)" class="view-details-btn">Xem chi tiết</button>
+      </div>
+    </div>
+  
+    <ng-template #noOrders>
+      <div class="no-orders">
+        <p>Không có đơn hàng nào để hiển thị.</p>
+      </div>
+    </ng-template>
+  </div>

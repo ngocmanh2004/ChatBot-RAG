@@ -1,0 +1,75 @@
+.modal-header {
+  background-color: #007bff;
+  color: white;
+  border-bottom: none;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.container h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.table {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.1);
+}
+
+.table th {
+  background-color: #f0f8ff;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sua-xoa button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 8px;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sua-xoa .btn-danger:hover {
+  background-color: #007538;
+  transform: scale(1.1);
+}
+
+.sua-xoa .btn-warning:hover {
+  background-color: #d39e00;
+  transform: scale(1.1);
+}
+
+.modal-body .form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.2s ease-in-out;
+}
+
+.modal-body .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+.modal-body button[type="submit"] {
+  background-color: #28a745;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 25px;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.modal-body button[type="submit"]:hover {
+  background-color: #218838;
+}

@@ -1,0 +1,57 @@
+<h2>Quản lý thương hiệu</h2>
+<button type="button" class="btn-add-brand" [routerLink]="['/admin/brands/create']">
+  <i class="fas fa-plus"></i> Thêm thương hiệu
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Sửa Thương Hiệu Mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form *ngIf="selected_brand" (ngSubmit)="suaBrand()">
+          <div class="mb-3">
+            <label for="Name" class="form-label">Tên Thương Hiệu</label>
+            <input type="text" class="form-control" id="Name" [(ngModel)]="brand_name" name="Name" required>
+          </div>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Cập Nhật Thương Hiệu</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Tên thương hiệu</th>
+        <th style="width: 300px;">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brand_category">
+        <td>
+          <a [routerLink]="['/admin/products/list', brand.brand_id]" [routerLinkActive]="'active-link'">
+            {{ brand.brand_name }}
+          </a>
+        </td>
+        <td class="sua-xoa">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addModal" (click)="editBrand(brand)">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button style="margin-left: 20px;" type="button" class="btn btn-warning" (click)="deleteBrand(brand)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

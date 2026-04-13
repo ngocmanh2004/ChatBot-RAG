@@ -1,0 +1,39 @@
+{
+  "name": "m-bot",
+  "module": "server.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run server.ts",
+    "dev": "bun --hot run server.ts",
+    "test:rag": "bun run scripts/rag-smoke-test.ts"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "@langchain/community": "^1.1.27",
+    "@langchain/core": "^0.3.43",
+    "@langchain/google-genai": "^0.1.12",
+    "@langchain/mongodb": "^0.1.0",
+    "@langchain/pinecone": "^0.2.0",
+    "@pinecone-database/pinecone": "^5.1.1",
+    "axios": "^1.8.4",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dropbox": "^10.34.0",
+    "express": "^4.21.2",
+    "googleapis": "^171.4.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "langchain": "^0.3.19",
+    "mongodb": "^6.15.0",
+    "peggy": "^4.2.0",
+    "uuid": "^11.1.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

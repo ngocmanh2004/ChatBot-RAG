@@ -1,0 +1,144 @@
+.product-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.create-button {
+  position: relative;
+}
+
+.btn-buy-now {
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  border: none;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-buy-now:hover {
+  background: linear-gradient(45deg, #ffcc00, #ff6600);
+  transform: scale(1.05);
+}
+
+.modal-content {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h1 {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-close:hover {
+  color: #ff6600;
+}
+
+.modal-body {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.form-control,
+select,
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.8px solid #ddd;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus {
+  outline: none;
+  border-color: #ff6600;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+}
+
+small {
+  color: #999;
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 4px;
+}
+
+.modal-footer {
+  border-top: none;
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-footer .btn-secondary {
+  background: #ccc;
+  color: #333;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 600;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+  background: #999;
+  color: #fff;
+}
+
+.modal-footer .btn-primary {
+  background: #ff6600;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-weight: 700;
+  transition: background 0.3s ease;
+}
+
+.modal-footer .btn-primary:hover {
+  background: #ffcc00;
+  color: #333;
+  cursor: pointer;
+}
